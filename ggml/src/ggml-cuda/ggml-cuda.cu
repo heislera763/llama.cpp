@@ -715,6 +715,9 @@ ggml_backend_cuda_context::~ggml_backend_cuda_context() {
         if (cublas_handles[i] != nullptr) {
             CUBLAS_CHECK(cublasDestroy(cublas_handles[i]));
         }
+        if (cublas_workspaces[i] != nullptr) {
+            CUDA_CHECK(cudaFree(cublas_workspaces[i]));
+        }
     }
 }
 
